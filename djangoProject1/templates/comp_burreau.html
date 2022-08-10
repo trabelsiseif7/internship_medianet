@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block extra_css %}
+    <style xmlns="http://www.w3.org/1999/html">
+    </style>
+{% endblock %}
+{% block title %} History {% endblock title %}
+
+
+{% block content %}
+
+
+
+
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h3 class="page-title">Dashboards</h3>
+                    </div>
+                </div>
+            </div>
+
+         <form action="" method="POST" class="form-horizontal">
+           {% csrf_token %}
+             <div class="form-group row">
+                    <div class="col-sm-9">
+                <label for="cono1" class="col-sm-2 text-right control-label col-form-label">Product referance : </label>
+                <input type = "text" name ="referance"  class="form-control form-control-lg" aria-describedby="basic-addon1" placeholder="referance de pc" required><br>
+                <button type="submit" style="width:30%;" value="Submit" class="btn btn-primary2">search</button>
+                </div>
+                </div>
+         </form>
+
+    {% if dict %}
+
+
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+             <div class="container-fluid" >
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row el-element-overlay">
+
+                    {% for nom , store1 , store2 , link1 , link2 , img , prix1 , prix2 , ref in dict %}
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="el-card-item" style="max-height: 280px;overflow: hidden;">
+                                    <div class="el-card-avatar el-overlay-1" ><img style="height: 150px; object-fit:contain; " src="{{ img }}" alt="user" />
+                                        <div class="el-overlay">
+                                            <ul class="list-style-none el-info">
+                                                <li class="el-item"><a class="btn default btn-outline image-popup-vertical-fit el-link" href={{ img }} ><i class="mdi mdi-magnify-plus"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="el-card-content">
+                                        <h6 ><a class="m-b-0" href=" {% url 'afficheburreau' ref  %}" >{{ nom }}</a>  </h6>
+                                        <table>
+                                            <tr>
+                                                 <td style="width:10%"><a  href="{{ link1 }}"> {{ store1 }} </a></td>
+
+                                                 <td style="width:10%"><a  href="{{ link2 }}"> {{ store2 }} </a></td>
+                                            </tr>
+                                            <tr></tr>
+                                            <tr></tr>
+                                            <tr>
+                                                <td style="width:10%"><span class="text-muted">{{ prix1 }} DT </span></td>
+
+                                                <td style="width:10%"><span class="text-muted">{{ prix2 }} DT </span></td>
+
+                                            </tr>
+
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                        </div>
+                        </div>
+                  {% endif %}
+                {% if dict1  %}
+                    <div class="container-fluid" >
+                    <!-- ============================================================== -->
+                    <!-- Start Page Content -->
+                    <!-- ============================================================== -->
+                    <div class="row el-element-overlay">
+                       {% for nom , store1 , link1 , img , prix1  in dict1 %}
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="el-card-item" style="max-height: 280px;overflow: hidden;">
+                                    <div class="el-card-avatar el-overlay-1" ><img style="height: 150px; object-fit:contain; " src="{{ img }}" alt="user" />
+                                        <div class="el-overlay">
+                                            <ul class="list-style-none el-info">
+                                                <li class="el-item"><a class="btn default btn-outline image-popup-vertical-fit el-link" href={{ img }} ><i class="mdi mdi-magnify-plus"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="el-card-content">
+                                        <h6 ><a class="m-b-0" href="{{ link1 }}">{{ nom }}</a>  </h6>
+                                        <span  > {{ store1 }} </span> <br>
+                                        <span class="text-muted">{{ prix1 }} DT </span>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% if recomended %}
+                        <br>
+
+                                <div class="col-12 d-flex no-block align-items-center">
+                                    <h3 class="page-title">you may also like :</h3>
+                                </div>
+
+                        <br>
+                         {% for nom , store , link , img , prix in recomended %}
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="el-card-item" style="max-height: 280px;overflow: hidden;">
+                                    <div class="el-card-avatar el-overlay-1" ><img style="height: 150px; object-fit:contain; " src="{{ img }}" alt="user" />
+                                        <div class="el-overlay">
+                                            <ul class="list-style-none el-info">
+                                                <li class="el-item"><a class="btn default btn-outline image-popup-vertical-fit el-link" href={{ link }} ><i class="mdi mdi-magnify-plus"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="el-card-content">
+                                        <h6 ><a class="m-b-0" href="{{ link }}">{{ nom }}</a>  </h6> <span class="text-muted"> {{ prix }} DT </span><br> <span class="text-muted"> {{ store }} </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                     {% endfor %}
+                        {% endif %}
+                    </div>
+                    </div>
+                        {% endif %}
+
+
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+
+            <!-- ============================================================== -->
+
+{% endblock %}
+{% block extra_js %}
+
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="dashboard/js/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="dashboard/js/popper.min.js"></script>
+    <script src="dashboard/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="dashboard/js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="dashboard/js/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="dashboard/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="dashboard/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="dashboard/js/custom.min.js"></script>
+    <!-- this page js -->
+    <script src="dashboard/js/jquery.magnific-popup.min.js"></script>
+    <script src="dashboard/js/meg.init.js"></script>
+{% endblock %}

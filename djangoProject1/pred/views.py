@@ -122,55 +122,8 @@ def logoutUser(request):
     logout(request)
     return redirect('login')
 
-
-"""def comp(request):
-    data = pd.read_excel('C:/Users/trabe/OneDrive/Bureau/my_data1.xlsx')
-    data = data.sort_values(by= 'prix' )
-    if request.method == 'POST' :
-        nom = []
-        store = []
-        link = []
-        img = []
-        prix = []
-        recomended_nom = []
-        recomended_store = []
-        recomended_link = []
-        recomended_img = []
-        recomended_prix = []
-        r = 0
-        referance = request.POST['referance']
-        for i in data.index :
-            if data['reference'][i] == referance :
-                nom.append(data['nom'][i])
-                store.append(data['store'][i])
-                link.append(data['link'][i])
-                img.append(data['image link'][i])
-                prix.append(data['prix'][i])
-
-                if len(prix) > 0 and r == 0:
-                    r = 1
-                    for i in data.index :
-                        print(data['prix'][i])
-                        print(prix[0])
-                        if float(data['prix'][i]) < float(prix[0])+30 and float(data['prix'][i]) > float(prix[0])  - 30 :
-                            recomended_nom.append(data['nom'][i])
-                            recomended_store.append(data['store'][i])
-                            recomended_link.append(data['link'][i])
-                            recomended_img.append(data['image link'][i])
-                            recomended_prix.append(data['prix'][i])
-
-        dict = zip(nom, store, link, img,prix)
-        recomended = zip(recomended_nom,recomended_store,recomended_link,recomended_img,recomended_prix)
-        context = {'dict': dict , 'recomended': recomended}
-    else :
-        dict = zip( data['nom'],data['store'],data['link'],data['image link'],data['prix'] )
-        context = {'dict':dict}
-       # print(dict)
-
-    return render(request, 'comp.html',context)"""
-
 def comp(request,f):
-    con = sqlite3.connect(r'C:\Users\trabe\OneDrive\Bureau\djangoProject1\db.sqlite3')
+    con = sqlite3.connect(r'db.sqlite3')
 
 
     if f == '2' :
@@ -282,8 +235,10 @@ def affiche(request , ref) :
     link2 = []
     r = 0
 
-    data = pd.read_excel('C:/Users/trabe/OneDrive/Bureau/my_data1.xlsx')
-    print(ref)
+    con = sqlite3.connect(r'db.sqlite3')
+
+    data = pd.read_sql_query("select * from pred_product", con)
+
     for i in range(len(data)):
         if data['reference'][i] == ref and r==0 :
             nom.append(data['nom'][i])
@@ -324,7 +279,7 @@ def affiche(request , ref) :
 
 
 def comp_burreau(request):
-    con = sqlite3.connect(r'C:\Users\trabe\OneDrive\Bureau\djangoProject1\db.sqlite3')
+    con = sqlite3.connect(r'db.sqlite3')
 
 
 
@@ -401,7 +356,7 @@ def comp_burreau(request):
 
 
 def comp_smartphone(request , f):
-    con = sqlite3.connect(r'C:\Users\trabe\OneDrive\Bureau\djangoProject1\db.sqlite3')
+    con = sqlite3.connect(r'db.sqlite3')
 
     if f == '1' :
         data = pd.read_sql_query("select * from pred_smartphone WHERE cast (prix as float ) > 500 and cast (prix as float ) <= 1000  ", con)
@@ -513,7 +468,7 @@ def affiche_burreau(request , ref) :
     link2 = []
     r = 0
 
-    con = sqlite3.connect(r'C:\Users\trabe\OneDrive\Bureau\djangoProject1\db.sqlite3')
+    con = sqlite3.connect(r'db.sqlite3')
 
     data = pd.read_sql_query("select * from pred_burreau", con)
     #print(ref)

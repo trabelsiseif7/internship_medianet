@@ -174,13 +174,13 @@ def comp(request,f):
 
 
     if f == '2' :
-        data = pd.read_sql_query("select * from pred_product WHERE cast (prix as float ) > 1000 and cast (prix as float ) < 1500  ", con)
+        data = pd.read_sql_query("select * from pred_product WHERE cast (prix as float ) > 1000 and cast (prix as float ) <= 1500  ", con)
     elif f == '3' :
-        data = pd.read_sql_query("select * from pred_product WHERE cast (prix as float ) > 1500 and cast (prix as float ) < 2000   ", con)
+        data = pd.read_sql_query("select * from pred_product WHERE cast (prix as float ) > 1500 and cast (prix as float ) <= 2000   ", con)
     elif f == '4' :
         data = pd.read_sql_query("select * from pred_product WHERE cast (prix as float ) > 2000  ", con)
     else :
-        data = pd.read_sql_query("select * from pred_product WHERE cast (prix as float ) < 1000  ", con)
+        data = pd.read_sql_query("select * from pred_product WHERE cast (prix as float ) <= 1000  ", con)
 
     data = data.sort_values(by='prix')
 
@@ -400,12 +400,21 @@ def comp_burreau(request):
     return render(request, 'comp_burreau.html',context)
 
 
-def comp_smartphone(request):
+def comp_smartphone(request , f):
     con = sqlite3.connect(r'C:\Users\trabe\OneDrive\Bureau\djangoProject1\db.sqlite3')
 
+    if f == '1' :
+        data = pd.read_sql_query("select * from pred_smartphone WHERE cast (prix as float ) > 500 and cast (prix as float ) <= 1000  ", con)
+    elif f == '2' :
+        data = pd.read_sql_query("select * from pred_smartphone WHERE cast (prix as float ) > 1000 and cast (prix as float ) <= 1500  ", con)
+    elif f == '3' :
+        data = pd.read_sql_query("select * from pred_smartphone WHERE cast (prix as float ) > 1500 and cast (prix as float ) <= 2000   ", con)
+    elif f == '4' :
+        data = pd.read_sql_query("select * from pred_smartphone WHERE cast (prix as float ) > 2000  ", con)
+    else :
+        data = pd.read_sql_query("select * from pred_smartphone WHERE cast (prix as float ) <= 500  ", con)
 
 
-    data = pd.read_sql_query("select * from pred_smartphone", con)
 
     data = data.sort_values(by='prix')
 

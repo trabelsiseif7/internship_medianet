@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block extra_css %}
+    <style xmlns="http://www.w3.org/1999/html">
+
+    </style>
+{% endblock %}
+{% block title %} History {% endblock title %}
+
+
+{% block content %}
+
+{% for nom,img,prix,ecran_size,ecran_type,cpu_type,cpu_frequency,ram,rom,carte_graphic,ref_carte_graphic,sys_exploitation,garanti,store,link,prix2,ecran_size2,ecran_type2,cpu_type2,cpu_frequency2,ram2,rom2,carte_graphic2,ref_carte_graphic2,sys_exploitation2,garanti2,store2,link2 in dict %}
+
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h3 class="page-title">{{ nom }}</h3>
+                    </div>
+                </div>
+            <div class="el-card-avatar el-overlay-1" ><img style="height: 240px; object-fit:contain; " src="{{ img }}" alt="user" /></div>
+            </div>
+
+
+                <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row el-element-overlay">
+
+
+<table style="width:100%">
+
+
+                             <tr>
+
+                                 <th>store</th>
+                                 <td ><a  href="{{ link }}"> {{ store }} </a></td>
+                                 <td ><a  href="{{ link2 }}"> {{ store2 }} </a></td>
+                             </tr>
+                            <tr>
+                                <th>price</th>
+                                <td ><span class="text-muted">{{ prix }} DT </span></td>
+                                <td ><span class="text-muted">{{ prix2 }} DT </span></td>
+                            </tr>
+                            <tr>
+                                            <th>screen size</th>
+                                <td ><span class="text-muted">{{ ecran_size }}  </span></td>
+                                <td ><span class="text-muted">{{ ecran_size2 }}  </span></td>
+                            </tr>
+                            <tr>
+                                            <th>screen type</th>
+                                <td ><span class="text-muted">{{ ecran_type }}  </span></td>
+                                <td ><span class="text-muted">{{ ecran_type2 }}  </span></td>
+                            </tr>
+                            <tr>
+                                            <th>cpu type</th>
+                                       <td ><span class="text-muted">{{ cpu_type }}  </span></td>
+                                       <td ><span class="text-muted">{{ cpu_type2 }}  </span></td>
+
+                            </tr>
+                            <tr>
+                                            <th>cpu frequency</th>
+                                      <td ><span class="text-muted">{{ cpu_frequency }}  </span></td>
+                                       <td ><span class="text-muted">{{ cpu_frequency2 }}  </span></td>
+                            </tr>
+                            <tr>
+                                            <th>RAM</th>
+                                           <td ><span class="text-muted">{{ ram }} Go </span></td>
+                                               <td ><span class="text-muted">{{ ram2 }} Go </span></td>
+
+                            </tr>
+                            <tr>
+                                            <th>Storage</th>
+                                           <td ><span class="text-muted">{{ rom }}  </span></td>
+                                            <td ><span class="text-muted">{{ rom2 }}  </span></td>
+                            </tr>
+                            <tr>
+                                            <th>graphic card</th>
+                                            <td ><span class="text-muted">{{ carte_graphic }}  </span></td>
+                                            <td ><span class="text-muted">{{ carte_graphic2 }}  </span></td>
+                            </tr>
+                            <tr>
+                                            <th>graphic card referance </th>
+                                            <td ><span class="text-muted">{{ ref_carte_graphic }} </span></td>
+                                            <td ><span class="text-muted">{{ ref_carte_graphic2 }} </span></td>
+                            </tr>
+                            <tr>
+                                            <th>system</th>
+                                           <td ><span class="text-muted">{{ sys_exploitation }}  </span></td>
+                                            <td ><span class="text-muted">{{ sys_exploitation2 }}  </span></td>
+                            </tr>
+                            <tr>
+                                            <th>garanti</th>
+                                            <td ><span class="text-muted">{{ garanti }} ans </span></td>
+                                            <td ><span class="text-muted">{{ garanti2 }} ans </span></td>
+
+                             </tr>
+
+                    {% endfor %}
+
+                    </table>
+
+
+                </div>
+
+                </div>
+
+
+{% endblock %}
+{% block extra_js %}
+
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="dashboard/js/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="dashboard/js/popper.min.js"></script>
+    <script src="dashboard/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="dashboard/js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="dashboard/js/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="dashboard/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="dashboard/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="dashboard/js/custom.min.js"></script>
+    <!-- this page js -->
+    <script src="dashboard/js/jquery.magnific-popup.min.js"></script>
+    <script src="dashboard/js/meg.init.js"></script>
+{% endblock %}
